@@ -54,12 +54,23 @@ pub struct ServiceJwtHeader {
     pub alg: String,
 }
 
+/// Represents valid parameters that can be used for service JWTs.
 pub struct ServiceJwtParams {
+    /// The "iss" (issuer) claim identifies the principal that issued the JWT
     pub iss: String,
+    /// The "aud" (audience) claim identifies the recipients that the JWT is intended for.
     pub aud: String,
+    /// The "exp" (expiration time) claim identifies the expiration time on or after which the
+    /// JWT MUST NOT be accepted for processing.
     pub exp: Option<u64>,
+    /// The "lxm" (lexicon method) claim specifies a lexicon-defined method that the token is "bound"
+    /// Example: A token can be bounded to the `app.bsky.feed.getFeedSkeleton` method. This means that 
+    /// the token can only be used for calling `getFeedSkeleton.
     pub lxm: Option<String>,
+    /// The "jti" (JWT ID) claim provides a unique identifier for the JWT. It is also used to prevent
+    /// replay attacks.
     pub jti: Option<String>,
+    /// 
     pub keypair: SecretKey,
 }
 
